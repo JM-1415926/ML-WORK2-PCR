@@ -5,6 +5,7 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import joblib
 import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold
+import json
 
 def load_preprocessed_data(file_path):
     """
@@ -74,8 +75,7 @@ def train_and_save_gb(X, y, output_model_path="gb_model.pkl"):
     cv_strategy = KFold(n_splits=5, shuffle=True, random_state=42)
 
     selected_features_order = X_train.columns.tolist()
-    # 保存为JSON格式以保持顺序
-    import json
+    # save feature order as json
     with open('feature_order.json', 'w') as f:
         json.dump(selected_features_order, f)
 
