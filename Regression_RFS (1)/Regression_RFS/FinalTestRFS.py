@@ -40,7 +40,7 @@ for feature in feature_order:
     if feature in X_imputed.columns:
         X_selected[feature] = X_imputed[feature]
     else:
-        X_selected[feature] = 0  # 对缺失的特征填充0
+        X_selected[feature] = 0
 
 # Standardize features
 X_final = pd.DataFrame(scaler.transform(X_selected), columns=feature_order)
@@ -53,7 +53,7 @@ model = load("Model-GB.pkl")
 predictions = model.predict(X_final)
 
 # Save predictions
-output_file = "RFSPredictions.csv"
+output_file = "RFSPrediction.csv"
 output = pd.DataFrame({"ID": IDs, "Prediction": predictions})
 output.to_csv(output_file, index=False)
 print(f"Predictions saved to {output_file}")
